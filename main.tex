@@ -31,14 +31,14 @@
 \usepackage{xcolor} % To add color
 \AtBeginSection[]{\begin{frame}<beamer>\frametitle{}\tableofcontents[currentsection,hideothersubsections]\end{frame}}
 \subtitle{}
-\institute[]{SOTA Report: \newline Hyperspectral Image Analysis for  Cluster Detection}
+\institute[]{SOTA Report \$ Implement: \newline Clustering for Hyperspectral Image Analysis}
 \titlegraphic{\includegraphics[height=2.5cm]{duke}}
 \usetheme{CambridgeUS}
 \usepackage{beamer_udl_theme}
 \setbeamertemplate{navigation symbols}{}
 \author{Juntang Wang}
 \date{}
-\title{Group Meeting May 30, 2024}
+\title{Group Meeting Jul 24, 2024}
 \begin{document}
 \maketitle
 
@@ -714,7 +714,7 @@
     
     {\color{gray}Proposes a new unsupervised band selection method for hyperspectral imaging by adapting an information-maximization clustering algorithm to maximize mutual information between data features and cluster assignments, incorporating multiple image features for improved performance.}
     \begin{itemize} \tiny
-    \\item \textbf{Mutual Information Maximization:}
+    \item \textbf{Mutual Information Maximization:}
     \[
     \text{MI}(X;Y) = \sum_{x \in X} \sum_{y \in Y} p(x,y) \log \frac{p(x,y)}{p(x)p(y)}
     \]
@@ -1870,23 +1870,61 @@
 \end{itemize}
 \end{frame}
 
-\section{Conclusion}
-\begin{frame}{Conclusion}
+\section{Kernels}
+\begin{frame}{Kernels}
+    \begin{table}[h]
+    \centering
     \small
-    \begin{itemize}
-        \item Hyperspectral imaging combined with advanced unsupervised clustering techniques offers a powerful tool for detailed spectral analysis across various applications.
-        \item Integration with EEG and BCI technologies provides enhanced capabilities for brain signal analysis, improving the accuracy and efficiency of these systems.
-        \item The state-of-the-art methods, benchmark datasets, and ready software packages provide a solid foundation for further research and development in hyperspectral image analysis.
-    \end{itemize}
+    \begin{tabular}{|>{\centering\arraybackslash}m{2cm}|>{\centering\arraybackslash}m{4cm}|>{\arraybackslash}m{4cm}|}
+    \hline
+    \textbf{Type} & \textbf{Formula} & \textbf{Properties} \\
+    \hline
+    Linear & $K(x, y) = x \cdot y$ & Simple linear relationship \newline Convex \\
+    \hline
+    Poly. & $K(x, y) = (x \cdot y + c)^d$ & \(c\) (offset), \(d\) (degree) \newline Captures polynomial features \newline Non-convex for high \(d\) \\
+    \hline
+    Gaussian & $K(x, y) = \exp(-\gamma \|x - y\|^2)$ & \(\gamma\) (spread) \newline Isotropic \newline Convex, smooth \\
+    \hline
+    Sigmoid & $K(x, y) = \tanh(\alpha x \cdot y + c)$ & \(\alpha\) (slope), \(c\) (offset) \newline Non-convex \\
+    \hline
+    Exp. & $K(x, y) = \exp(-|x - y|)$ & Robust to outliers \newline Convex, L1 norm-based \\
+    \hline
+    Laplacian & $K(x, y) = \exp\left(-\frac{|x - y|}{\sigma}\right)$ & \(\sigma\) (scale) \newline Handles varying densities \newline Convex \\
+    \hline
+    \end{tabular}
+    \label{tab:kernels}
+    \end{table}
 \end{frame}
+
 
 \section{Further Reading}
 \begin{frame}{Further Reading}
-    \frametitle{Access the Full Research Repo}
-    For more detailed information, access our GitHub page:
-    
-    \vspace{1em} % Adds some vertical space
-    \href{https://gitlab.oit.duke.edu/jw853/clustering4hsi}{https://gitlab.oit.duke.edu/jw853/clustering4hsi}
+    \frametitle{Access:}
+    \begin{itemize}
+        \item For more detailed information, access our GitX page:
+
+        \begin{itemize}
+            \item {\color{blue} \href{https://gitlab.oit.duke.edu/jw853/clustering4hsi}{https://gitlab.oit.duke.edu/jw853/clustering4hsi}}
+            
+            \item {\color{blue} \href{https://github.com/qqgjyx/CS_GroupMeeting_HSI}{https://github.com/qqgjyx/CS\_GroupMeeting\_HSI}} {\tiny (Overleaf submodel)}
+
+            \item {\color{blue} \href{https://github.com/qqgjyx/c4h-data}{https://github.com/qqgjyx/c4h-data}} {\tiny (data worker)}
+
+            \item {\color{blue} \href{https://github.com/qqgjyx/CS-Group}{https://github.com/qqgjyx/CS-Group}} {\tiny \color{red}(deprecated)}
+        \end{itemize}
+        
+
+        \item For DEMO of early implementation:
+        \begin{itemize}
+            \item {\color{blue} \href{http://c4h.qqgjyx.com}{https://c4h.qqgjyx.com}}
+        \end{itemize}
+
+        
+        \item Juntang's personal website:
+        \begin{itemize}
+            \item {\color{blue} \href{https://www.qqgjyx.com}{https://www.qqgjyx.com}}
+        \end{itemize}
+    \end{itemize}    
 \end{frame}
 
 \section{References}
