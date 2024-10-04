@@ -1,27 +1,13 @@
-##
-SHELL := /bin/bash # Use bash syntax
+# Makefile for LaTeX documents
+shell = /bin/bash
 
-MAIN = main
-# "make" target
+main = main
 
-all: pdf
+.PHONY: all clean
 
-interactive:			## Interactively build PDF when changing sources
-	latexmk -pdf -pdflatex="pdflatex" -pvc $(MAIN)
+all:
+	latexmk -pdf main.tex
 
-
-pdf:					## PDF compilation
-	latexmk -pdf -pdflatex="pdflatex --synctex=1 '\input{$(MAIN)}'" $(MAIN)
-
-
-update: up				## svn update
-up:
-	svn up ./../ ./
-
-
-clean:				## clean-up
-	rm -f *.bbl *.blg *.log *.aux *.nav *.out *.snm *.synctex.gz *.toc \
-	      $(MAIN).pdf *.vrb *.bcf *.run.xml *.xwm *~ *.fdb_latexmk, *-blx.bib
-	rm -f sections/*.{log,bu}
-	rm -f sections/*~
-	rm -f preamble/*~
+clean:
+	latexmk -C main.tex
+	rm -f main.bbl main.run.xml main.bib

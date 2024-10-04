@@ -24,7 +24,18 @@
 \usepackage{url}
 \usepackage{smfthm}
 \usepackage{animate}
-\usepackage{cite}
+\usepackage[
+backend=biber, 
+citestyle=ieee,
+sorting=nyt,    
+doi=false,
+url=false,
+isbn=false,
+giveninits=true,
+maxbibnames=9999,
+hyperref]{biblatex}
+
+\addbibresource{HSI.bib} 
 \usepackage{caption}
 \usepackage{hyperref}
 \usepackage{tikz}
@@ -1930,8 +1941,7 @@
 \section{References}
 \begin{frame}[allowframebreaks]{References}
 \small
-\bibliographystyle{IEEEtran}
-\bibliography{HSI}
+\printbibliography
 \end{frame}
 
 \end{document}
